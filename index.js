@@ -8,15 +8,13 @@ let rimraf = require('rimraf')
 let mkdirp = require('mkdirp')
 
 //require('longjhon')
-
-
-
-
 require('songbird')
 
 const NODE_ENV = process.env.NODE_ENV
 const PORT = process.env.PORT || 8000
 const ROOT_DIR = process.cwd()
+
+console.log('DropBox running on ' + PORT + ' port.')
 
 
 let app = express()
@@ -24,6 +22,7 @@ let app = express()
 if(NODE_ENV === 'development') {
 	app.use(morgan('dev'))
 }
+console.log('DropBox running in ' + NODE_ENV + ' mode.')
 app.listen(PORT, () => console.log(`listening @ http://127.0.0.1:${PORT}`))
 
 app.get('*', setFileMeta, sendHeaders, (req, res) =>{
